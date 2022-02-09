@@ -4,7 +4,7 @@
 #
 Name     : pypi-aiohttp
 Version  : 3.8.1
-Release  : 1
+Release  : 2
 URL      : https://files.pythonhosted.org/packages/5a/86/5f63de7a202550269a617a5d57859a2961f3396ecd1739a70b92224766bc/aiohttp-3.8.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/5a/86/5f63de7a202550269a617a5d57859a2961f3396ecd1739a70b92224766bc/aiohttp-3.8.1.tar.gz
 Summary  : Async http client/server framework (asyncio)
@@ -17,14 +17,11 @@ BuildRequires : buildreq-cmake
 BuildRequires : buildreq-distutils3
 BuildRequires : pypi(aiosignal)
 BuildRequires : pypi(async_timeout)
-BuildRequires : pypi(asynctest)
 BuildRequires : pypi(attrs)
 BuildRequires : pypi(charset_normalizer)
 BuildRequires : pypi(frozenlist)
-BuildRequires : pypi(idna_ssl)
 BuildRequires : pypi(multidict)
 BuildRequires : pypi(setuptools)
-BuildRequires : pypi(typing_extensions)
 BuildRequires : pypi(yarl)
 
 %description
@@ -56,13 +53,10 @@ Requires: python3-core
 Provides: pypi(aiohttp)
 Requires: pypi(aiosignal)
 Requires: pypi(async_timeout)
-Requires: pypi(asynctest)
 Requires: pypi(attrs)
 Requires: pypi(charset_normalizer)
 Requires: pypi(frozenlist)
-Requires: pypi(idna_ssl)
 Requires: pypi(multidict)
-Requires: pypi(typing_extensions)
 Requires: pypi(yarl)
 
 %description python3
@@ -78,7 +72,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1641397884
+export SOURCE_DATE_EPOCH=1644431902
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib

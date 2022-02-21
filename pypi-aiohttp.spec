@@ -4,7 +4,7 @@
 #
 Name     : pypi-aiohttp
 Version  : 3.8.1
-Release  : 3
+Release  : 4
 URL      : https://files.pythonhosted.org/packages/5a/86/5f63de7a202550269a617a5d57859a2961f3396ecd1739a70b92224766bc/aiohttp-3.8.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/5a/86/5f63de7a202550269a617a5d57859a2961f3396ecd1739a70b92224766bc/aiohttp-3.8.1.tar.gz
 Summary  : Async http client/server framework (asyncio)
@@ -13,6 +13,7 @@ License  : Apache-2.0 MIT
 Requires: pypi-aiohttp-license = %{version}-%{release}
 Requires: pypi-aiohttp-python = %{version}-%{release}
 Requires: pypi-aiohttp-python3 = %{version}-%{release}
+Requires: pypi-cchardet
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-distutils3
 BuildRequires : pypi(aiosignal)
@@ -72,7 +73,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1645465563
+export SOURCE_DATE_EPOCH=1645466719
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib

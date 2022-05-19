@@ -4,12 +4,14 @@
 #
 Name     : pypi-aiohttp
 Version  : 3.8.1
-Release  : 6
+Release  : 7
 URL      : https://files.pythonhosted.org/packages/5a/86/5f63de7a202550269a617a5d57859a2961f3396ecd1739a70b92224766bc/aiohttp-3.8.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/5a/86/5f63de7a202550269a617a5d57859a2961f3396ecd1739a70b92224766bc/aiohttp-3.8.1.tar.gz
 Summary  : Async http client/server framework (asyncio)
 Group    : Development/Tools
 License  : Apache-2.0 MIT
+Requires: pypi-aiohttp-filemap = %{version}-%{release}
+Requires: pypi-aiohttp-lib = %{version}-%{release}
 Requires: pypi-aiohttp-license = %{version}-%{release}
 Requires: pypi-aiohttp-python = %{version}-%{release}
 Requires: pypi-aiohttp-python3 = %{version}-%{release}
@@ -29,6 +31,24 @@ BuildRequires : pypi(yarl)
 ==================================
 Async http client/server framework
 ==================================
+
+%package filemap
+Summary: filemap components for the pypi-aiohttp package.
+Group: Default
+
+%description filemap
+filemap components for the pypi-aiohttp package.
+
+
+%package lib
+Summary: lib components for the pypi-aiohttp package.
+Group: Libraries
+Requires: pypi-aiohttp-license = %{version}-%{release}
+Requires: pypi-aiohttp-filemap = %{version}-%{release}
+
+%description lib
+lib components for the pypi-aiohttp package.
+
 
 %package license
 Summary: license components for the pypi-aiohttp package.
@@ -50,6 +70,7 @@ python components for the pypi-aiohttp package.
 %package python3
 Summary: python3 components for the pypi-aiohttp package.
 Group: Default
+Requires: pypi-aiohttp-filemap = %{version}-%{release}
 Requires: python3-core
 Provides: pypi(aiohttp)
 Requires: pypi(aiodns)
@@ -70,13 +91,16 @@ python3 components for the pypi-aiohttp package.
 %prep
 %setup -q -n aiohttp-3.8.1
 cd %{_builddir}/aiohttp-3.8.1
+pushd ..
+cp -a aiohttp-3.8.1 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1649705619
+export SOURCE_DATE_EPOCH=1652992311
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -87,6 +111,15 @@ export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 -m build --wheel --skip-dependency-check --no-isolation
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+python3 -m build --wheel --skip-dependency-check --no-isolation
+
+popd
 
 %install
 export MAKEFLAGS=%{?_smp_mflags}
@@ -98,9 +131,26 @@ pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+pip install --root=%{buildroot}-v3 --no-deps --ignore-installed dist/*.whl
+popd
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
+
+%files filemap
+%defattr(-,root,root,-)
+/usr/share/clear/filemap/filemap-pypi-aiohttp
+
+%files lib
+%defattr(-,root,root,-)
+/usr/share/clear/optimized-elf/other*
 
 %files license
 %defattr(0644,root,root,0755)

@@ -4,7 +4,7 @@
 #
 Name     : pypi-aiohttp
 Version  : 3.8.3
-Release  : 13
+Release  : 14
 URL      : https://files.pythonhosted.org/packages/ff/4f/62d9859b7d4e6dc32feda67815c5f5ab4421e6909e48cbc970b6a40d60b7/aiohttp-3.8.3.tar.gz
 Source0  : https://files.pythonhosted.org/packages/ff/4f/62d9859b7d4e6dc32feda67815c5f5ab4421e6909e48cbc970b6a40d60b7/aiohttp-3.8.3.tar.gz
 Summary  : Async http client/server framework (asyncio)
@@ -100,7 +100,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1663790356
+export SOURCE_DATE_EPOCH=1666284560
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -110,6 +110,7 @@ export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 export MAKEFLAGS=%{?_smp_mflags}
+pypi-dep-fix.py . charset-normalizer
 python3 -m build --wheel --skip-dependency-check --no-isolation
 pushd ../buildavx2/
 export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 -msse2avx"
@@ -117,6 +118,7 @@ export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 -msse2avx "
 export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+pypi-dep-fix.py . charset-normalizer
 python3 -m build --wheel --skip-dependency-check --no-isolation
 
 popd
@@ -125,8 +127,10 @@ popd
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-aiohttp
+cp %{_builddir}/aiohttp-%{version}/LICENSE.txt %{buildroot}/usr/share/package-licenses/pypi-aiohttp/d4c7ca48f2d26cd60006bc2ace82041594ebfe63 || :
 cp %{_builddir}/aiohttp-%{version}/vendor/llhttp/LICENSE-MIT %{buildroot}/usr/share/package-licenses/pypi-aiohttp/f7eb77642fea2d18bc5b53d361802ca0fb698b3e || :
 pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
+pypi-dep-fix.py %{buildroot} charset-normalizer
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -153,6 +157,7 @@ popd
 
 %files license
 %defattr(0644,root,root,0755)
+/usr/share/package-licenses/pypi-aiohttp/d4c7ca48f2d26cd60006bc2ace82041594ebfe63
 /usr/share/package-licenses/pypi-aiohttp/f7eb77642fea2d18bc5b53d361802ca0fb698b3e
 
 %files python

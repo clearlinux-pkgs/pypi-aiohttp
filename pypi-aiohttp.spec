@@ -5,7 +5,7 @@
 #
 Name     : pypi-aiohttp
 Version  : 3.8.6
-Release  : 28
+Release  : 29
 URL      : https://files.pythonhosted.org/packages/fd/01/f180d31923751fd20185c96938994823f00918ee5ac7b058edc005382406/aiohttp-3.8.6.tar.gz
 Source0  : https://files.pythonhosted.org/packages/fd/01/f180d31923751fd20185c96938994823f00918ee5ac7b058edc005382406/aiohttp-3.8.6.tar.gz
 Summary  : Async http client/server framework (asyncio)

@@ -4,10 +4,10 @@
 # Using build pattern: pyproject
 #
 Name     : pypi-aiohttp
-Version  : 3.8.6
-Release  : 29
-URL      : https://files.pythonhosted.org/packages/fd/01/f180d31923751fd20185c96938994823f00918ee5ac7b058edc005382406/aiohttp-3.8.6.tar.gz
-Source0  : https://files.pythonhosted.org/packages/fd/01/f180d31923751fd20185c96938994823f00918ee5ac7b058edc005382406/aiohttp-3.8.6.tar.gz
+Version  : 3.9.0b0
+Release  : 30
+URL      : https://github.com/aio-libs/aiohttp/releases/download/v3.9.0b0/aiohttp-3.9.0b0.tar.gz
+Source0  : https://github.com/aio-libs/aiohttp/releases/download/v3.9.0b0/aiohttp-3.9.0b0.tar.gz
 Summary  : Async http client/server framework (asyncio)
 Group    : Development/Tools
 License  : Apache-2.0 MIT
@@ -62,10 +62,10 @@ python3 components for the pypi-aiohttp package.
 
 
 %prep
-%setup -q -n aiohttp-3.8.6
-cd %{_builddir}/aiohttp-3.8.6
+%setup -q -n aiohttp-3.9.0b0
+cd %{_builddir}/aiohttp-3.9.0b0
 pushd ..
-cp -a aiohttp-3.8.6 buildavx2
+cp -a aiohttp-3.9.0b0 buildavx2
 popd
 
 %build
@@ -73,7 +73,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1696863248
+export SOURCE_DATE_EPOCH=1697318142
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -122,7 +122,7 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-aiohttp
 cp %{_builddir}/aiohttp-%{version}/LICENSE.txt %{buildroot}/usr/share/package-licenses/pypi-aiohttp/d4c7ca48f2d26cd60006bc2ace82041594ebfe63 || :
 cp %{_builddir}/aiohttp-%{version}/vendor/llhttp/LICENSE-MIT %{buildroot}/usr/share/package-licenses/pypi-aiohttp/f7eb77642fea2d18bc5b53d361802ca0fb698b3e || :
-pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
+python3 -m installer --destdir=%{buildroot} dist/*.whl
 pypi-dep-fix.py %{buildroot} charset-normalizer
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -133,7 +133,7 @@ CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS -m64 -march=x86-64-v3 "
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS -m64 -march=x86-64-v3 "
-pip install --root=%{buildroot}-v3 --no-deps --ignore-installed dist/*.whl
+python3 -m installer --destdir=%{buildroot}-v3 dist/*.whl
 popd
 /usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 

@@ -7,7 +7,7 @@
 #
 Name     : pypi-aiohttp
 Version  : 3.9.0b0
-Release  : 32
+Release  : 33
 URL      : https://github.com/aio-libs/aiohttp/releases/download/v3.9.0b0/aiohttp-3.9.0b0.tar.gz
 Source0  : https://github.com/aio-libs/aiohttp/releases/download/v3.9.0b0/aiohttp-3.9.0b0.tar.gz
 Summary  : Async http client/server framework (asyncio)

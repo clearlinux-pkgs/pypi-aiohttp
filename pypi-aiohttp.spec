@@ -6,10 +6,10 @@
 # autospec commit: 5424026
 #
 Name     : pypi-aiohttp
-Version  : 3.11.4
-Release  : 53
-URL      : https://files.pythonhosted.org/packages/1d/cd/af0e573bdb77ae7df1148fe8e4ea854215a37db0b116aac6b5496335095e/aiohttp-3.11.4.tar.gz
-Source0  : https://files.pythonhosted.org/packages/1d/cd/af0e573bdb77ae7df1148fe8e4ea854215a37db0b116aac6b5496335095e/aiohttp-3.11.4.tar.gz
+Version  : 3.11.5
+Release  : 54
+URL      : https://files.pythonhosted.org/packages/c6/2e/e520ca73603e1970076b1b66baa9c0b367999f1653a5b7ff66e76639cdcc/aiohttp-3.11.5.tar.gz
+Source0  : https://files.pythonhosted.org/packages/c6/2e/e520ca73603e1970076b1b66baa9c0b367999f1653a5b7ff66e76639cdcc/aiohttp-3.11.5.tar.gz
 Summary  : Async http client/server framework (asyncio)
 Group    : Development/Tools
 License  : Apache-2.0 MIT
@@ -64,10 +64,10 @@ python3 components for the pypi-aiohttp package.
 
 
 %prep
-%setup -q -n aiohttp-3.11.4
-cd %{_builddir}/aiohttp-3.11.4
+%setup -q -n aiohttp-3.11.5
+cd %{_builddir}/aiohttp-3.11.5
 pushd ..
-cp -a aiohttp-3.11.4 buildavx2
+cp -a aiohttp-3.11.5 buildavx2
 popd
 
 %build
@@ -75,7 +75,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1732028941
+export SOURCE_DATE_EPOCH=1732040522
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib

@@ -1,5 +1,5 @@
 PKG_NAME := pypi-aiohttp
-URL = https://files.pythonhosted.org/packages/3f/24/d5c0aed3ed90896f8505786e3a1e348fd9c61284ef21f54ee9cdf8b92e4f/aiohttp-3.11.9.tar.gz
+URL = https://files.pythonhosted.org/packages/94/c4/3b5a937b16f6c2a0ada842a9066aad0b7a5708427d4a202a07bf09c67cbb/aiohttp-3.11.10.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common

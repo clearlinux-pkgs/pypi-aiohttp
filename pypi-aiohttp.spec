@@ -7,7 +7,7 @@
 #
 Name     : pypi-aiohttp
 Version  : 3.11.12
-Release  : 61
+Release  : 62
 URL      : https://files.pythonhosted.org/packages/37/4b/952d49c73084fb790cb5c6ead50848c8e96b4980ad806cf4d2ad341eaa03/aiohttp-3.11.12.tar.gz
 Source0  : https://files.pythonhosted.org/packages/37/4b/952d49c73084fb790cb5c6ead50848c8e96b4980ad806cf4d2ad341eaa03/aiohttp-3.11.12.tar.gz
 Summary  : Async http client/server framework (asyncio)
